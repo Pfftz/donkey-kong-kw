@@ -1,0 +1,40 @@
+# Godot 4+ specific ignores
+.godot/
+import-*
+export-*
+
+# OS-specific ignores
+.DS_Store
+Thumbs.db
+
+# Godot 4+ cache and temporary files
+.cache/
+.config/
+tmp/
+
+# Godot 4+ export templates
+export_templates/
+
+# Godot 4+ Android specific ignores
+/android/build/
+android/.gradle/
+android/.idea/
+android/local.properties
+android/app/build/
+android/app/.externalNativeBuild/
+android/app/.cxx/
+android/app/.idea/
+android/app/local.properties
+android/app/.gradle/
+
+# Godot 4+ iOS specific ignores
+ios/build/
+ios/.gradle/
+ios/.idea/
+ios/local.properties
+ios/app/build/
+ios/app/.externalNativeBuild/
+ios/app/.cxx/
+ios/app/.idea/
+ios/app/local.properties
+ios/app/.gradle/
