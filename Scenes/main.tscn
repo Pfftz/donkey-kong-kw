@@ -1,11 +1,11 @@
-[gd_scene load_steps=11 format=4 uid="uid://xlilloudovls"]
+[gd_scene load_steps=15 format=4 uid="uid://xlilloudovls"]
 
 [ext_resource type="PackedScene" uid="uid://bc87dan3j1gyy" path="res://Scenes/player.tscn" id="1_fdkmq"]
 [ext_resource type="Texture2D" uid="uid://1bdvd6pt2ktd" path="res://Assets/Kings and Pigs/Sprites/14-TileSets/Terrain (32x32).png" id="2_i6or4"]
 [ext_resource type="Texture2D" uid="uid://sufk471liay6" path="res://Assets/Kings and Pigs/Sprites/14-TileSets/Decorations (32x32).png" id="3_m0yf5"]
 [ext_resource type="PackedScene" uid="uid://cgugnlek1kdjj" path="res://Scenes/ladder.tscn" id="4_dm2ex"]
 [ext_resource type="PackedScene" uid="uid://drkoelnjgjtt8" path="res://Scenes/platform.tscn" id="5_40pgg"]
-[ext_resource type="PackedScene" uid="uid://c03nljakimrbs" path="res://Scenes/bomb.tscn" id="6_gftvr"]
+[ext_resource type="PackedScene" uid="uid://dwm40vw4qusbo" path="res://Scenes/bomb_spawner.tscn" id="6_teuw8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wbxup"]
 texture = ExtResource("2_i6or4")
@@ -1121,6 +1121,49 @@ texture = ExtResource("3_m0yf5")
 [sub_resource type="TileSet" id="TileSet_xxsuv"]
 sources/0 = SubResource("TileSetAtlasSource_furo8")
 
+[sub_resource type="Curve2D" id="Curve2D_s7r1i"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 3, -745, 0, 0, 0, 0, 806, -744, 0, 0, 0, 0, 806, -612, 0, 0, 0, 0, 270, -609, 0, 0, 0, 0, 268, -476, 0, 0, 0, 0, 1089, -477, 0, 0, 0, 0, 1092, -325, 0, 0, 0, 0, 341, -325, 0, 0, 0, 0, 338, -183, 0, 0, 0, 0, 1355, -186, 0, 0, 0, 0, 1358, -70, 0, 0, 0, 0, -62, -71)
+}
+point_count = 12
+
+[sub_resource type="Animation" id="Animation_mflma"]
+resource_name = "bomb_movement"
+length = 20.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 20),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_ca0ye"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ihfab"]
+_data = {
+"RESET": SubResource("Animation_ca0ye"),
+"bomb_movement": SubResource("Animation_mflma")
+}
+
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_fdkmq")]
@@ -1208,5 +1251,20 @@ position = Vector2(898, -856)
 [node name="Ladder" parent="." instance=ExtResource("4_dm2ex")]
 position = Vector2(320, -223)
 
-[node name="Bomb" parent="." instance=ExtResource("6_gftvr")]
-position = Vector2(142, -46)
+[node name="BombPath" type="Node2D" parent="."]
+
+[node name="Path2D" type="Path2D" parent="BombPath"]
+position = Vector2(29, 3)
+curve = SubResource("Curve2D_s7r1i")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="BombPath/Path2D"]
+position = Vector2(3, -745)
+rotation = 0.00124533
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BombPath/Path2D"]
+libraries = {
+"": SubResource("AnimationLibrary_ihfab")
+}
+
+[node name="BombSpawner" parent="." instance=ExtResource("6_teuw8")]
+position = Vector2(39, -742)
