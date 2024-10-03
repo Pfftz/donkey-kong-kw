@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwm40vw4qusbo"]
+[gd_scene load_steps=11 format=3 uid="uid://dwm40vw4qusbo"]
 
 [ext_resource type="Texture2D" uid="uid://01kyoh03sgx3" path="res://Assets/Kings and Pigs/Sprites/10-Cannon/Idle.png" id="1_1cjwm"]
 [ext_resource type="Script" path="res://Scripts/bomb_spawner.gd" id="1_bg7qg"]
 [ext_resource type="Texture2D" uid="uid://chcj1yvbhw63d" path="res://Assets/Kings and Pigs/Sprites/10-Cannon/Shoot (44x28).png" id="2_d46l1"]
+[ext_resource type="PackedScene" uid="uid://ccfvv0xjuysgs" path="res://Scenes/cannon_handler.tscn" id="4_hr3ge"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jl0b5"]
 atlas = ExtResource("1_1cjwm")
@@ -69,5 +70,8 @@ flip_h = true
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
+
+[node name="CannonHandler" parent="." instance=ExtResource("4_hr3ge")]
+position = Vector2(-35, -2)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -5,7 +5,7 @@ extends CharacterBody2D
 # Player movement variables
 @export var speed = 8000
 @export var gravity = 200
-@export var jump_height = -100
+@export var jump_height = -120
 
 # Movement and physics
 func _physics_process(delta):

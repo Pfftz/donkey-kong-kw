@@ -1123,9 +1123,24 @@ sources/0 = SubResource("TileSetAtlasSource_furo8")
 
 [sub_resource type="Curve2D" id="Curve2D_s7r1i"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 3, -745, 0, 0, 0, 0, 806, -744, 0, 0, 0, 0, 806, -612, 0, 0, 0, 0, 270, -609, 0, 0, 0, 0, 268, -476, 0, 0, 0, 0, 1089, -477, 0, 0, 0, 0, 1092, -325, 0, 0, 0, 0, 341, -325, 0, 0, 0, 0, 338, -183, 0, 0, 0, 0, 1355, -186, 0, 0, 0, 0, 1358, -70, 0, 0, 0, 0, -62, -71)
+"points": PackedVector2Array(0, 0, 0, 0, 29, -717, 0, 0, 0, 0, 161, -723, 0, 0, 0, 0, 806, -723, 0, 0, 0, 0, 807, -581, 0, 0, 0, 0, 270, -581, 0, 0, 0, 0, 270, -470, 0, 0, 0, 0, 1089, -471, 0, 0, 0, 0, 1092, -309, 0, 0, 0, 0, 337, -310, 0, 0, 0, 0, 337, -180, 0, 0, 0, 0, 1353, -180, 0, 0, 0, 0, 1355, -54, 0, 0, 0, 0, -61, -50)
 }
-point_count = 12
+point_count = 13
+
+[sub_resource type="Animation" id="Animation_ca0ye"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_mflma"]
 resource_name = "bomb_movement"
@@ -1141,21 +1156,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 1.0]
-}
-
-[sub_resource type="Animation" id="Animation_ca0ye"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PathFollow2D:progress_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ihfab"]
@@ -1258,8 +1258,8 @@ position = Vector2(29, 3)
 curve = SubResource("Curve2D_s7r1i")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="BombPath/Path2D"]
-position = Vector2(3, -745)
-rotation = 0.00124533
+position = Vector2(29, -717)
+rotation = -0.0454233
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BombPath/Path2D"]
 libraries = {
@@ -1267,4 +1267,4 @@ libraries = {
 }
 
 [node name="BombSpawner" parent="." instance=ExtResource("6_teuw8")]
-position = Vector2(39, -742)
+position = Vector2(58, -714)
