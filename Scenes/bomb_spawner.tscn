@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dwm40vw4qusbo"]
+[gd_scene load_steps=12 format=3 uid="uid://dwm40vw4qusbo"]
 
 [ext_resource type="Texture2D" uid="uid://01kyoh03sgx3" path="res://Assets/Kings and Pigs/Sprites/10-Cannon/Idle.png" id="1_1cjwm"]
 [ext_resource type="Script" path="res://Scripts/bomb_spawner.gd" id="1_bg7qg"]
@@ -59,6 +59,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hchga"]
+size = Vector2(58, 23)
+
 [node name="BombSpawner" type="Node2D"]
 script = ExtResource("1_bg7qg")
 
@@ -73,5 +76,11 @@ autostart = true
 
 [node name="CannonHandler" parent="." instance=ExtResource("4_hr3ge")]
 position = Vector2(-35, -2)
+
+[node name="Collisions" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions"]
+position = Vector2(-24, -0.5)
+shape = SubResource("RectangleShape2D_hchga")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
