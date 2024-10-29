@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://xlilloudovls"]
+[gd_scene load_steps=16 format=4 uid="uid://xlilloudovls"]
 
 [ext_resource type="PackedScene" uid="uid://bc87dan3j1gyy" path="res://Scenes/player.tscn" id="1_fdkmq"]
 [ext_resource type="Texture2D" uid="uid://1bdvd6pt2ktd" path="res://Assets/Kings and Pigs/Sprites/14-TileSets/Terrain (32x32).png" id="2_i6or4"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cgugnlek1kdjj" path="res://Scenes/ladder.tscn" id="4_dm2ex"]
 [ext_resource type="PackedScene" uid="uid://drkoelnjgjtt8" path="res://Scenes/platform.tscn" id="5_40pgg"]
 [ext_resource type="PackedScene" uid="uid://dwm40vw4qusbo" path="res://Scenes/bomb_spawner.tscn" id="6_teuw8"]
+[ext_resource type="PackedScene" uid="uid://b4ayw4k7h2okr" path="res://Scenes/BoxSpawner.tscn" id="7_1pdkx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wbxup"]
 texture = ExtResource("2_i6or4")
@@ -1211,9 +1212,6 @@ position = Vector2(880, -626)
 
 [node name="Platforms" type="Node" parent="."]
 
-[node name="Platform" parent="Platforms" instance=ExtResource("5_40pgg")]
-position = Vector2(309, -311)
-
 [node name="Platform2" parent="Platforms" instance=ExtResource("5_40pgg")]
 position = Vector2(321, -56)
 
@@ -1265,3 +1263,33 @@ libraries = {
 
 [node name="BombSpawner" parent="." instance=ExtResource("6_teuw8")]
 position = Vector2(106, -714)
+
+[node name="BoxSpawners" type="Node" parent="."]
+
+[node name="BoxSpawner" parent="BoxSpawners" instance=ExtResource("7_1pdkx")]
+position = Vector2(98, -575)
+flip_h = true
+
+[node name="BoxSpawner6" parent="BoxSpawners" instance=ExtResource("7_1pdkx")]
+position = Vector2(92, -847)
+flip_h = true
+
+[node name="BoxSpawner2" parent="BoxSpawners" instance=ExtResource("7_1pdkx")]
+position = Vector2(1201, -447)
+rotation = -3.14159
+flip_h = true
+flip_v = true
+
+[node name="BoxSpawner5" parent="BoxSpawners" instance=ExtResource("7_1pdkx")]
+position = Vector2(1347, -716)
+rotation = -3.14159
+flip_h = true
+flip_v = true
+
+[node name="BoxSpawner3" parent="BoxSpawners" instance=ExtResource("7_1pdkx")]
+position = Vector2(140, -303)
+flip_h = true
+
+[node name="BoxSpawner4" parent="BoxSpawners" instance=ExtResource("7_1pdkx")]
+position = Vector2(185, -175)
+flip_h = true
