@@ -16,6 +16,8 @@ func _on_body_entered(body: Node2D):
 		$AnimatedSprite2D.play("explode")
 		$Timer.start()
 		Global.is_bomb_moving = false
+		# Player takes damage
+		body.take_damage()
 	if body.name == "Terrain":
 		$AnimatedSprite2D.play("explode")
 		$Timer.start()

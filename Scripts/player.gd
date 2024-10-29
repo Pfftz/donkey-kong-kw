@@ -2,6 +2,13 @@
 
 extends CharacterBody2D
 
+#custom signals
+signal update_lives(lives, max_lives)
+
+#health stats
+var max_lives = 3
+var lives = 3
+
 # Player movement variables
 @export var speed = 8000
 @export var gravity = 200
@@ -39,20 +46,26 @@ func _process(delta):
 		# Update the last_direction variable
 		last_direction = current_direction
 
-# Movement and physics
+func take_damage():
+	if lives > 0:
+		lives = lives - 1
+		update_lives.emit(lives, max_lives)
+		print("Player took damage. Lives remaining: ", lives)
+		$AnimatedSprite2D.play("damage")
+		set_physics_process(false)
+
+#movement and physics
 func _physics_process(delta):
-	# Vertical movement velocity (down)
-	if !Global.is_climbing:
-		velocity.y += gravity * delta
-	
-	# Horizontal movement processing (left, right)
+	# vertical movement velocity (down)
+	velocity.y += gravity * delta
+	# horizontal movement processing (left, right)
 	horizontal_movement(delta)
 	
-	# Applies movement
-	move_and_slide()
+	#applies movement
+	move_and_slide() 
 	
-	# Applies animations
-	if !Global.is_attacking and !Global.is_climbing:
+	#applies animations
+	if !Global.is_attacking || !Global.is_climbing:
 		player_animations()
 		
 # Horizontal movement calculation
@@ -62,7 +75,7 @@ func horizontal_movement(delta):
 	# Horizontal velocity which moves player left or right based on input
 	velocity.x = horizontal_input * speed * delta
 
-# Animations
+#animations
 func player_animations():
 	# On left
 	if Input.is_action_pressed("left"):
@@ -86,8 +99,6 @@ func player_animations():
 	if not Input.is_action_pressed("left") and not Input.is_action_pressed("right"):
 		if is_on_floor():
 			$AnimatedSprite2D.play("idle")
-		else:
-			$AnimatedSprite2D.play("jump")
 		
 # Singular input captures
 func _input(event):
@@ -103,16 +114,17 @@ func _input(event):
 	
 	# On climbing ladders
 	if Global.is_climbing:
-		if not Input.is_action_pressed("climb"):
-			$AnimatedSprite2D.play("idle")
-		else:
-			$AnimatedSprite2D.play("climb")
-			gravity = 150
-			velocity.y = -110
+		if Input.is_action_pressed("climb"):
+			$AnimatedSprite2D.play("climb")	
+			gravity = 100
+			velocity.y = -160
+			Global.is_jumping = true
 	else:
-		Global.is_climbing = false
+		gravity = 200
+		Global.is_climbing = false	
+		Global.is_jumping = false
 		
 # Reset our animation variables
 func _on_animated_sprite_2d_animation_finished():
 	Global.is_attacking = false
-	Global.is_climbing = false
+	set_physics_process(true)
